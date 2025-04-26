@@ -1,4 +1,5 @@
 import { Price } from './price'
+import { decimal } from '@sypos/decimal.js';
 
 type PriceRule = {
   minimumQuantity: number

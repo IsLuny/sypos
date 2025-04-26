@@ -1,6 +1,7 @@
 import decimal from 'decimal.js'
 
 export type DecimalTypes = decimal
+export type integer = number & { __int__: undefined }
 
 // Default precision
 decimal.set({ precision: 20 })

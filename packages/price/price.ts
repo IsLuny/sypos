@@ -2,14 +2,13 @@ import {
   add,
   decimal,
   divide,
+  integer,
   multiply,
   sub,
   toFixedNumber,
   toNumber
-} from '@/infra/lib'
-import type { CurrencyType } from '../db/drizzle/migrations/enums'
-
-type Currency = CurrencyType
+} from '@sypos/decimal.js'
+import type { Currency } from '../typings/v1/currency'
 
 export class Price {
   private _value: decimal
