@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String @id @unique
+  public_id Int    @unique @default(autoincrement())
+
+  status     Status   @default(ACTIVE)
+  created_at DateTime
+
+  workspace_id String
+  workspace    Workspace @relation(fields: [workspace_id], references: [id])
+
+  name     String
+  email    String
+  role     String
+  features BigInt
+
+  auth UserAuth[]
+
+  @@map("users")
+}
+
+model UserAuth {
+  user_id     String @id @unique
+  sign_in_key String @unique
+
+  password_hash String
+
+  workspace_id String
+  user         User   @relation(fields: [user_id], references: [id])
+
+  @@map("users_auth")
+}
+
+model Workspace {
+  id        String @id @unique
+  public_id Int    @unique @default(autoincrement())
+  status    Status @default(ACTIVE)
+
+  users  User[]
+  config WorkspaceConfig?
+
+  name        String
+  description String?
+  features    BigInt
+
+  @@map("workspaces")
+}
+
+model WorkspaceConfig {
+  workspace_id String    @id @unique
+  workspace    Workspace @relation(fields: [workspace_id], references: [id])
+  status       Status    @default(ACTIVE)
+
+  currency String @default("BRL")
+  timezone String @default("UTC-03:00/America/Sao_Paulo")
+
+  url_logo String?
+
+  @@map("workspace_config")
+}
+
+enum Status {
+  ACTIVE
+  INACTIVE
+  DELETED
+}

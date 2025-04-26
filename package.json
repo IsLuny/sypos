@@ -1,0 +1,49 @@
+{
+  "name": "sypos",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "AGPL-3.0",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "services/*",
+      "packages/*",
+      "apps/*"
+    ]
+  },
+  "author": {
+    "name": "IsLuny Org. - Sypos Team"
+  },
+  "scripts": {
+    "workspace:docker:up": "docker compose -f ./services/workspace/docker-compose.local.yaml --env-file ./services/workspace/.env.local up -d workspace-db-pg",
+    "docker:services:up": "yarn workspace:docker:up",
+    "auth:prisma:migrate:dev": "prisma migrate dev --schema=services/auth/prisma/schema.prisma",
+    "auth:prisma:generate": "prisma generate --schema=services/auth/prisma/schema.prisma",
+    "auth:prisma:dev": "prisma migrate dev && prisma generate",
+    "workspace:prisma:migrate:local": "dotenv -e services/workspace/.env.local -- prisma migrate dev --schema=services/workspace/prisma/schema.prisma",
+    "workspace:prisma:generate": "prisma generate --schema=services/workspace/prisma/schema.prisma",
+    "workspace:prisma:local": "yarn workspace:prisma:migrate:local && yarn workspace:prisma:generate",
+    "workspace:dev": "tsx watch services/workspace/src/index.ts"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.2.1",
+    "@commitlint/config-conventional": "^19.1.0",
+    "@commitlint/types": "^19.0.3",
+    "@types/node": "^22.14.1",
+    "@typescript-eslint/eslint-plugin": "^5.30.5",
+    "@typescript-eslint/parser": "^5.30.5",
+    "commitizen": "^4.3.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "dotenv-cli": "^8.0.0",
+    "eslint": "8.19.0",
+    "eslint-plugin-import-helpers": "^2.0.1",
+    "eslint-plugin-unused-imports": "^4.1.4",
+    "husky": "^9.0.11",
+    "prisma": "^6.6.0",
+    "tsconfig-paths": "^4.0.0",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.3",
+    "yarn": "^1.22.22"
+  },
+  "dependencies": {}
+}

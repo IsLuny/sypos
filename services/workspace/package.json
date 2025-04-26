@@ -1,0 +1,25 @@
+{
+  "name": "@sypos/workspace-service",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "license": "AGPL-3.0",
+  "author": {
+    "name": "IsLuny Org. - Sypos Team"
+  },
+  "scripts": {
+    "prisma:migrate:local": "dotenv -e .env.local -- prisma migrate dev --schema=prisma/schema.prisma",
+    "prisma:generate": "prisma generate --schema=prisma/schema.prisma",
+    "prisma:dev": "yarn prisma:migrate:local && yarn prisma:generate",
+    "dev": "tsx watch src/index.ts"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.3"
+  },
+  "dependencies": {
+    "@prisma/client": "6.6.0",
+    "axios": "^1.8.4",
+    "dotenv": "^16.5.0",
+    "fastify": "^5.3.2",
+    "zod": "^3.24.3"
+  }
+}
