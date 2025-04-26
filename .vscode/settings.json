@@ -1,25 +1,33 @@
 {
-    "material-icon-theme.folders.associations": {
-        "logger": "mock",
-        "repositories": "class",
-        "observer": "review"
-    },
-    "explorer.fileNesting.patterns": {
-        "docker-compose.yml": "*dockerfile"
-    },
-    "[prisma]": {
-        "editor.defaultFormatter": "Prisma.prisma"
-    },
-    "editor.formatOnSave": true,
-    "autoBarrel.language.defaultLanguage": "TypeScript",
-    "autoBarrel.files.disableRecursiveBarrelling": true,
-    "autoBarrel.files.includeExtensionOnExport": ["ts"],
-    "autoBarrel.files.ignoreFilePathPatternOnExport": ["**/*.spec.*", "**/*.test.*"],
-    "autoBarrel.files.keepExtensionOnExport": false,
-    "autoBarrel.files.detectExportsInFiles": true,
-    "autoBarrel.files.exportDefaultFilename": "filename",
-    "autoBarrel.formatting.excludeSemiColonAtEndOfLine": true,
-    "autoBarrel.formatting.useSingleQuotes": true,
-    "autoBarrel.formatting.endOfLine": "lf",
-    "autoBarrel.formatting.insertFinalNewline": true,
+  "material-icon-theme.folders.associations": {
+    "logger": "mock",
+    "repositories": "class",
+    "observer": "review"
+  },
+  "explorer.fileNesting.patterns": {
+    "docker-compose.yml": "*dockerfile"
+  },
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "editor.tabSize": 4,
+  "autoBarrel.language.defaultLanguage": "TypeScript",
+  "autoBarrel.files.disableRecursiveBarrelling": true,
+  "autoBarrel.files.includeExtensionOnExport": [
+    "ts"
+  ],
+  "autoBarrel.files.ignoreFilePathPatternOnExport": [
+    "**/*.spec.*",
+    "**/*.test.*"
+  ],
+  "autoBarrel.files.keepExtensionOnExport": false,
+  "autoBarrel.files.detectExportsInFiles": true,
+  "autoBarrel.files.exportDefaultFilename": "filename",
+  "autoBarrel.formatting.excludeSemiColonAtEndOfLine": true,
+  "autoBarrel.formatting.useSingleQuotes": true,
+  "autoBarrel.formatting.endOfLine": "lf",
+  "autoBarrel.formatting.insertFinalNewline": true
 }

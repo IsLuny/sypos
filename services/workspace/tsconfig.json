@@ -1,0 +1,33 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "removeComments": true,
+        "strict": true,
+        "rootDir": "./src",
+        "typeRoots": [
+            "./src/@types/*"
+        ],
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+		"moduleResolution": "node",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "strictPropertyInitialization": false,
+        "baseUrl": "./src",
+        "paths": {
+            "@/*": ["./*"]
+        }
+    },
+    "include": [
+        "./src/*"
+    ],
+    "exclude": [
+        "build",
+        "node_modules",
+        "package-lock.json",
+        "package.json",
+        "commitlint.config.ts"
+    ]
+}
