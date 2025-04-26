@@ -24,8 +24,6 @@
     "**/*.test.*"
   ],
   "autoBarrel.files.keepExtensionOnExport": false,
-  "autoBarrel.files.detectExportsInFiles": true,
-  "autoBarrel.files.exportDefaultFilename": "filename",
   "autoBarrel.formatting.excludeSemiColonAtEndOfLine": true,
   "autoBarrel.formatting.useSingleQuotes": true,
   "autoBarrel.formatting.endOfLine": "lf",

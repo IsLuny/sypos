@@ -1,8 +1,8 @@
 {
-  "name": "@sypos/api-types",
+  "name": "@sypos/logger",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
+  "main": "src/index.ts",
   "dependencies": {
     "@sypos/utilities": "*"
   }

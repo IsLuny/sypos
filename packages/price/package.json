@@ -1,8 +1,8 @@
 {
   "name": "@sypos/price-calculator",
   "version": "1.0.0",
-  "description": "An arbitrary-precision Decimal type for JavaScript.",
-  "main": "index.ts",
+  "description": "",
+  "main": "src/index.ts",
   "license": "MIT",
   "dependencies": {
     "@sypos/decimal.js": "*",
