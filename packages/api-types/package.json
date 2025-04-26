@@ -1,0 +1,9 @@
+{
+  "name": "@sypos/api-types",
+  "version": "1.0.0",
+  "description": "An arbitrary-precision Decimal type for JavaScript.",
+  "main": "index.ts",
+  "dependencies": {
+    "@sypos/utilities": "*"
+  }
+}
