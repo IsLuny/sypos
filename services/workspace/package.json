@@ -7,10 +7,10 @@
     "name": "IsLuny Org. - Sypos Team"
   },
   "scripts": {
-    "prisma:migrate:local": "dotenv -e .env.local -- prisma migrate dev --schema=prisma/schema.prisma",
+    "prisma:migrate:local": "chmod +x ./prisma/migrate.sh && ./prisma/migrate.sh .env.local -- echo \"A: $POSTGRES_URL\"",
     "prisma:generate": "prisma generate --schema=prisma/schema.prisma",
     "prisma:dev": "yarn prisma:migrate:local && yarn prisma:generate",
-    "dev": "tsx watch src/index.ts"
+    "dev": "tsx watch --env-file=.env.local src/index.ts"
   },
   "devDependencies": {
     "@types/dotenv": "^8.2.3"
