@@ -4,6 +4,7 @@
   "description": "",
   "main": "src/index.ts",
   "dependencies": {
-    "@sypos/utilities": "*"
+    "@sypos/utilities": "*",
+    "chalk": "^5.4.1"
   }
 }

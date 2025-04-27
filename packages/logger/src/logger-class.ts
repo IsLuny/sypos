@@ -1,6 +1,7 @@
+import chalk from 'chalk'
+
 import { ColorHexComplex, ColorUtils } from '@sypos/utilities'
 import { Optional } from '@sypos/utilities'
-import chalk from 'chalk'
 
 import { ChalkColor } from '../typing'
 
@@ -34,6 +35,7 @@ interface LoggerFormatOptions {
 }
 
 export interface LoggerConfig<T extends string> {
+	debug?: boolean,
 	levels: LoggerLevelsConfig<T>
 	format?: Optional<LoggerFormatOptions, 'function' | 'colorize'>
 }
@@ -43,11 +45,14 @@ const printf: LoggerPrintMessageFormatter = ({ label, badge, message }) => `${ba
 export class Logger {
 	levels: LoggerLevelsConfig
 	formatOptions: LoggerFormatOptions
+	debugActived: boolean
 	
 	constructor(config: LoggerConfig<string>) {
 		for(const [level, levelConfig] of Object.entries(config.levels)) {
 			(this as any)[level] = this.makeLogger({ ...levelConfig, level })
 		}
+
+		this.debugActived = config.debug ?? true
 
 		this.formatOptions = {
 			colorize: config.format?.colorize ?? {},
@@ -56,7 +61,11 @@ export class Logger {
 	}
 
 	private makeLogger(config: LoggerLevel & { level: string }) {
-		return (message: string, more?: LoggerPrintMessageFormatterData['more']) => this._log(config, message, more)
+		return (message: string, more?: LoggerPrintMessageFormatterData['more']) => {
+			if(!(config.logLevel === 'debug' && !this.debugActived)) {
+				this._log(config, message, more)
+			}
+		}
 	}
 
 	private _log({ level, ...config }: LoggerLevel & { level: string }, _message: string, more?: LoggerPrintMessageFormatterData['more']) {

@@ -1,9 +1,4 @@
 {
-  "material-icon-theme.folders.associations": {
-    "logger": "mock",
-    "repositories": "class",
-    "observer": "review"
-  },
   "explorer.fileNesting.patterns": {
     "docker-compose.yml": "*dockerfile"
   },
@@ -27,5 +22,21 @@
   "autoBarrel.formatting.excludeSemiColonAtEndOfLine": true,
   "autoBarrel.formatting.useSingleQuotes": true,
   "autoBarrel.formatting.endOfLine": "lf",
-  "autoBarrel.formatting.insertFinalNewline": true
+  "autoBarrel.formatting.insertFinalNewline": true,
+  "material-icon-theme.folders.associations": {
+    "logger": "mock",
+    // "repositories": "class",
+    "observer": "review",
+    "domain": "custom",
+    "workspace": "store"
+  },
+  "material-icon-theme.folders.customClones": [
+		{
+			"name": "repositories",
+			"base": "custom",
+			"color": "#28b463",
+			"lightColor": "#58d68d",
+			"folderNames": ["repositories"]
+		},
+  ]
 }

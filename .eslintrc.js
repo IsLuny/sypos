@@ -99,6 +99,8 @@ module.exports = {
 				newlinesBetween: 'always',
 				groups: [
 					'module',
+					['/@sypos*/'],
+					['/@//'],
 					['/@types/', '/typing*/'],
 					['parent', 'sibling', 'index'],
 				],
