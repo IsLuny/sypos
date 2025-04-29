@@ -1,7 +1,4 @@
 {
-  "explorer.fileNesting.patterns": {
-    "docker-compose.yml": "*dockerfile"
-  },
   "[prisma]": {
     "editor.defaultFormatter": "Prisma.prisma"
   },

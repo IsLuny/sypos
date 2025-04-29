@@ -5,7 +5,7 @@ import type { z } from 'zod'
 
 import { envSchema } from './env-schema'
 
-export type EnvType = z.infer<typeof envSchema> & { POSTGRES_URL: string }
+export type EnvType = z.infer<typeof envSchema>
 
 function loadEnv(): EnvType {
 	console.log('Loading env')
@@ -23,13 +23,9 @@ function loadEnv(): EnvType {
 	}
 
 	const envData = result.data
-	
-	const env = Object.assign(envData, 
-		{ POSTGRES_URL: `postgresql://${envData.POSTGRES_USER}:${envData.POSTGRES_PASSWORD}@${envData.POSTGRES_HOST}:${envData.POSTGRES_PORT}/${envData.POSTGRES_DB}?schema=public` }
-	)
 
-	global.__env = env
-	return env
+	global.__env = envData
+	return envData
 }
 
 export const env: EnvType = global.__env ?? loadEnv()

@@ -1,7 +1,11 @@
-import { prisma } from '@/infra/database/prisma'
+import { setupDatabase } from './main/config'
+import { setupServer } from './main/server'
 
-async function main() {
-	await prisma.$connect()
+export async function main() {
+	await setupDatabase()
+	await setupServer()
 }
 
-main()
+if(require.main === module) {
+	main()
+}

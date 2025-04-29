@@ -13,10 +13,12 @@ export const envSchema = z.object({
 	PORT: z.coerce.number().default(3000),
 	DEBUG: z.coerce.boolean().default(true),
 
-	DATABASE_URL: z.string().optional(),
 	POSTGRES_HOST: z.string().default('localhost'),
 	POSTGRES_PASSWORD: z.string().default('postgres'),
 	POSTGRES_USER: z.string().default('postgres'),
 	POSTGRES_PORT: z.coerce.number().default(5432),
 	POSTGRES_DB: z.string().default('db-dev'),
-})
+}).transform(envData => ({
+	...envData,
+	POSTGRES_URL: `postgresql://${envData.POSTGRES_USER}:${envData.POSTGRES_PASSWORD}@${envData.POSTGRES_HOST}:${envData.POSTGRES_PORT}/${envData.POSTGRES_DB}?schema=public`,
+}))

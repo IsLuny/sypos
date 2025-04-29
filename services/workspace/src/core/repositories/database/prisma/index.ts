@@ -3,7 +3,6 @@ import { env } from '@/env'
 import { PrismaClient } from './prisma-client'
 
 const createDatabaseClient = () => {
-	console.log(env.POSTGRES_URL)
 	const prisma = new PrismaClient({
 		datasources: {
 			db: {
@@ -16,5 +15,7 @@ const createDatabaseClient = () => {
 
 	return prisma
 }
+
+export { PrismaClient }
 
 export const prisma = global.__prisma ?? createDatabaseClient()

@@ -2,7 +2,7 @@ import chalk from 'chalk'
 
 import { createLogger } from '@sypos/logger'
 
-import { env } from '@/env'
+import { debug } from '@/env'
 
 const setupLogger = () => {
 	const logger = createLogger({
@@ -13,7 +13,7 @@ const setupLogger = () => {
 			error: { logLevel: 'error', badge: '◉', color: '#FF4500' },
 			fatal: { logLevel: 'error', badge: '✘', color: '#FF0000' },
 		},
-		debug: env.DEBUG,
+		debug,
 		format: {
 			colorize: { badge: true, label: true },
 			function: ({ badge, label, message, timestamp, commonLabel, more = {} }) => {
