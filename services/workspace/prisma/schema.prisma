@@ -13,7 +13,7 @@ model User {
   public_id Int    @unique @default(autoincrement())
 
   status     Status   @default(ACTIVE)
-  created_at DateTime
+  created_at DateTime @default(now())
 
   workspace_id String
   workspace    Workspace @relation(fields: [workspace_id], references: [id])
@@ -23,7 +23,7 @@ model User {
   role     String
   features BigInt
 
-  auth UserAuth[]
+  auth UserAuth?
 
   @@map("users")
 }

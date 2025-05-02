@@ -10,3 +10,10 @@ export type FastifyTypedInstance = FastifyInstance<
 >
 
 export type FastifyFC = (fastify: FastifyTypedInstance) => any
+
+interface RequestContextGeneric {
+    Payload?: object
+    Header?: object
+}
+
+export type RequestContext<Args extends RequestContextGeneric> = Args

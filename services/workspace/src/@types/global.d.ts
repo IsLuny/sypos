@@ -1,5 +1,5 @@
 /* eslint-disable no-var */
-import type { PrismaClient } from '@/core/repositories/database/prisma'
+import type { PrismaClient } from '@/core/database/prisma'
 import type { EnvType } from '@/env'
 import { HttpServer } from '@/infra/http/server'
 import type { Logger } from '@/logger'

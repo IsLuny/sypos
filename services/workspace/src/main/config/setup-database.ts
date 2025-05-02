@@ -1,4 +1,4 @@
-import { prisma } from '@/core/repositories/database/prisma'
+import { prisma } from '@/core/database/prisma'
 
 export const setupDatabase = async() => {
 	await prisma.$connect()
