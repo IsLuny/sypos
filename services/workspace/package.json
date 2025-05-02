@@ -7,13 +7,15 @@
     "name": "IsLuny Org. - Sypos Team"
   },
   "scripts": {
-    "prisma:migrate:local": "chmod +x ./prisma/migrate.sh && ./prisma/migrate.sh .env.local -- echo \"A: $POSTGRES_URL\"",
+    "prisma:migrate:local": "chmod +x ./prisma/migrate.sh && ./prisma/migrate.sh .env.local",
     "prisma:generate": "prisma generate --schema=prisma/schema.prisma",
     "prisma:dev": "yarn prisma:migrate:local && yarn prisma:generate",
+    "prisma:seed": "tsx --env-file=.env.local prisma/seed.ts",
     "dev": "tsx watch --env-file=.env.local src/index.ts"
   },
   "devDependencies": {
-    "@types/dotenv": "^8.2.3"
+    "@types/dotenv": "^8.2.3",
+    "@types/jsonwebtoken": "^9.0.9"
   },
   "dependencies": {
     "@fastify/cors": "^11.0.1",
@@ -25,6 +27,8 @@
     "dotenv": "^16.5.0",
     "fastify": "^5.3.2",
     "fastify-type-provider-zod": "^4.0.2",
+    "jsonwebtoken": "^9.0.2",
+    "uuid": "^11.1.0",
     "zod": "^3.24.3"
   }
 }

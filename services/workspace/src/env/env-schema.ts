@@ -18,6 +18,9 @@ export const envSchema = z.object({
 	POSTGRES_USER: z.string().default('postgres'),
 	POSTGRES_PORT: z.coerce.number().default(5432),
 	POSTGRES_DB: z.string().default('db-dev'),
+	JWT_SECRET: z.string(),
+	PASSWORD_SECRET: z.string(),
+	PASSWORD_IV: z.string(),
 }).transform(envData => ({
 	...envData,
 	POSTGRES_URL: `postgresql://${envData.POSTGRES_USER}:${envData.POSTGRES_PASSWORD}@${envData.POSTGRES_HOST}:${envData.POSTGRES_PORT}/${envData.POSTGRES_DB}?schema=public`,
