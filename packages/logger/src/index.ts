@@ -2,7 +2,7 @@ export * from './logger-class'
 
 import { LoggerConfig, Logger } from './logger-class'
 
-type LoggerLogFunction = (message: string, more?: { details?: string | object, tags?: string | string[] }) => void
+type LoggerLogFunction = (message: unknown, more?: { details?: string | object, tags?: string | string[], depth?: number }) => void
 
 type LoggerMethods<T extends string> = Record<T, LoggerLogFunction>
 

@@ -1,4 +1,5 @@
 import chalk from 'chalk'
+import { inspect } from 'node:util'
 
 import { ColorHexComplex, ColorUtils } from '@sypos/utilities'
 import { Optional } from '@sypos/utilities'
@@ -23,7 +24,7 @@ interface LoggerPrintMessageFormatterData {
 	badge: string
 	timestamp: string
 	color?: ColorHexComplex | ChalkColor
-	more?: { details?: string, tags?: string | string[] }
+	more?: { details?: string, tags?: string | string[], depth?: number }
 	commonLabel: string
 }
 
@@ -61,14 +62,14 @@ export class Logger {
 	}
 
 	private makeLogger(config: LoggerLevel & { level: string }) {
-		return (message: string, more?: LoggerPrintMessageFormatterData['more']) => {
+		return (message: unknown, more?: LoggerPrintMessageFormatterData['more']) => {
 			if(!(config.logLevel === 'debug' && !this.debugActived)) {
 				this._log(config, message, more)
 			}
 		}
 	}
 
-	private _log({ level, ...config }: LoggerLevel & { level: string }, _message: string, more?: LoggerPrintMessageFormatterData['more']) {
+	private async _log({ level, ...config }: LoggerLevel & { level: string }, _message: unknown, more?: LoggerPrintMessageFormatterData['more']) {
 		let colorFn = (string: string) => string
 
 		if(config.color) {
@@ -85,17 +86,27 @@ export class Logger {
 		const commonLabel = config.label ?? level
 		const label = this.formatOptions.colorize?.label ? colorFn(commonLabel) : commonLabel
 
-		const message = this.formatOptions.function({
+		let inspectedMessage = _message
+		
+		if(inspectedMessage instanceof Promise) {
+			inspectedMessage = await inspectedMessage
+		}
+
+		if(typeof inspectedMessage !== 'string') {
+			inspectedMessage = await inspect(inspectedMessage, { depth: more?.depth ?? 0 })
+		}
+
+		const messageToPrint = this.formatOptions.function({
 			badge,
 			label,
 			level,
-			message: _message,
+			message: inspectedMessage as string,
 			timestamp: new Date().toISOString(),
 			more,
 			color: config.color,
 			commonLabel,
 		})
 
-		console.log(message)
+		console.log(messageToPrint)
 	}
 }
