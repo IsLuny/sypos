@@ -1,10 +1,14 @@
 import { sign, verify } from 'jsonwebtoken'
 
-import { syposHttpErrors } from '../errors/codes/http'
-import { Either, left, right } from '../errors/either'
+import { syposHttpErrors } from '../../core/errors/codes/http'
+import { Either, left, right } from '../../core/errors/either'
 
 interface JwtDecoded {
   expireAt: number
+  user_id: string
+  workspace_id: string
+  role: string
+  permissions: string
 }
 
 type VerifyResult = Either<{ name: keyof typeof syposHttpErrors, message: string }, JwtDecoded>
