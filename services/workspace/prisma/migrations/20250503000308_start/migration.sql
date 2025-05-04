@@ -6,6 +6,7 @@ CREATE TABLE "users" (
     "id" TEXT NOT NULL,
     "public_id" SERIAL NOT NULL,
     "status" "Status" NOT NULL DEFAULT 'ACTIVE',
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "workspace_id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
@@ -16,9 +17,19 @@ CREATE TABLE "users" (
 );
 
 -- CreateTable
+CREATE TABLE "users_auth" (
+    "userId" TEXT NOT NULL,
+    "signInKey" TEXT NOT NULL,
+    "password_hash" TEXT NOT NULL,
+    "workspace_id" TEXT NOT NULL,
+
+    CONSTRAINT "users_auth_pkey" PRIMARY KEY ("userId")
+);
+
+-- CreateTable
 CREATE TABLE "workspaces" (
     "id" TEXT NOT NULL,
-    "public_id" SERIAL NOT NULL,
+    "publicId" SERIAL NOT NULL,
     "status" "Status" NOT NULL DEFAULT 'ACTIVE',
     "name" TEXT NOT NULL,
     "description" TEXT,
@@ -29,13 +40,13 @@ CREATE TABLE "workspaces" (
 
 -- CreateTable
 CREATE TABLE "workspace_config" (
-    "workspace_id" TEXT NOT NULL,
+    "workspaceId" TEXT NOT NULL,
     "status" "Status" NOT NULL DEFAULT 'ACTIVE',
     "currency" TEXT NOT NULL DEFAULT 'BRL',
     "timezone" TEXT NOT NULL DEFAULT 'UTC-03:00/America/Sao_Paulo',
-    "url_logo" TEXT,
+    "logo_url" TEXT,
 
-    CONSTRAINT "workspace_config_pkey" PRIMARY KEY ("workspace_id")
+    CONSTRAINT "workspace_config_pkey" PRIMARY KEY ("workspaceId")
 );
 
 -- CreateIndex
@@ -45,16 +56,25 @@ CREATE UNIQUE INDEX "users_id_key" ON "users"("id");
 CREATE UNIQUE INDEX "users_public_id_key" ON "users"("public_id");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "users_auth_userId_key" ON "users_auth"("userId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "users_auth_signInKey_key" ON "users_auth"("signInKey");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "workspaces_id_key" ON "workspaces"("id");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "workspaces_public_id_key" ON "workspaces"("public_id");
+CREATE UNIQUE INDEX "workspaces_publicId_key" ON "workspaces"("publicId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "workspace_config_workspace_id_key" ON "workspace_config"("workspace_id");
+CREATE UNIQUE INDEX "workspace_config_workspaceId_key" ON "workspace_config"("workspaceId");
 
 -- AddForeignKey
 ALTER TABLE "users" ADD CONSTRAINT "users_workspace_id_fkey" FOREIGN KEY ("workspace_id") REFERENCES "workspaces"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "workspace_config" ADD CONSTRAINT "workspace_config_workspace_id_fkey" FOREIGN KEY ("workspace_id") REFERENCES "workspaces"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "users_auth" ADD CONSTRAINT "users_auth_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "workspace_config" ADD CONSTRAINT "workspace_config_workspaceId_fkey" FOREIGN KEY ("workspaceId") REFERENCES "workspaces"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
