@@ -3,8 +3,9 @@
     "editor.defaultFormatter": "Prisma.prisma"
   },
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
+    "source.fixAll.eslint": "explicit",
   },
+  "editor.formatOnSave": true,
   "editor.tabSize": 4,
   "autoBarrel.language.defaultLanguage": "TypeScript",
   "autoBarrel.files.disableRecursiveBarrelling": true,
@@ -27,6 +28,14 @@
     "domain": "custom",
     "workspace": "store"
   },
+  "material-icon-theme.files.associations": {
+		"*.usecase.ts": "usecase",
+    "*.interface.ts": "interface",
+    "*.dto.ts": "dto",
+    "*.model.ts": "model",
+    "*.validation.ts": "validation",
+    "*.make.ts": "factory"
+	},
   "material-icon-theme.folders.customClones": [
 		{
 			"name": "repositories",
@@ -34,6 +43,44 @@
 			"color": "#28b463",
 			"lightColor": "#58d68d",
 			"folderNames": ["repositories"]
+		},
+  ],
+  "material-icon-theme.files.customClones": [
+		{
+			"name": "usecase",
+			"base": "pdm",
+			"color": "#1E90FF",
+			"lightColor": "#1E90FF"
+		},
+    {
+			"name": "interface",
+			"base": "template",
+			"color": "#1E90FF",
+			"lightColor": "#1E90FF"
+		},
+    {
+			"name": "dto",
+			"base": "template",
+			"color": "#ef2e8b",
+			"lightColor": "#ef2e8b"
+		},
+    {
+			"name": "model",
+			"base": "table",
+			"color": "#ef2e8b",
+			"lightColor": "#ef2e8b"
+		},
+    {
+			"name": "validation",
+			"base": "payload",
+			"color": "#ef5350",
+			"lightColor": "#ef5350"
+		},
+    {
+			"name": "factory",
+			"base": "renovate",
+			"color": "#ef5350",
+			"lightColor": "#ef5350"
 		},
   ]
 }

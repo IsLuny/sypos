@@ -7,7 +7,7 @@ import { version } from '@/../package.json'
 import { logger } from '@/logger'
 
 import { app } from './app'
-import { APIv1Route } from './routes/v1/index.route'
+import { Routes } from './routes/index.route'
 
 export const setupServer = async() => {
 	app.fastify.setValidatorCompiler(validatorCompiler)
@@ -19,7 +19,12 @@ export const setupServer = async() => {
 				title: 'Sypos Workspaces API',
 				version,
 			},
-		}, 
+			tags: [
+				{ name: 'user', description: 'User related end-points' },
+				{ name: 'workspace', description: 'Workspace related end-points' },
+			],
+		},
+		
 		transform: jsonSchemaTransform,
 	})
 
@@ -32,7 +37,7 @@ export const setupServer = async() => {
 	})
 
     // Register Routes
-	app.register(APIv1Route, { prefix: '/v1' })
+	app.register(Routes, { prefix: '/' })
 
 	await app.listen().then(({ port, address }) => {
 		logger.info(`Http Server is running on port ${port} (${address})`, { tags: 'Http Server' })

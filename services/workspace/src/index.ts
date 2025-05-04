@@ -1,5 +1,5 @@
-import { setupDatabase } from './main/config'
-import { setupServer } from './main/server'
+import { setupDatabase } from '@/main/config'
+import { setupServer } from '@/main/server'
 
 export async function main() {
 	await setupDatabase()

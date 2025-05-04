@@ -9,61 +9,61 @@ datasource db {
 }
 
 model User {
-  id        String @id @unique
-  public_id Int    @unique @default(autoincrement())
+  id       String @id @unique
+  publicId Int    @unique @default(autoincrement()) @map("public_id")
 
-  status     Status   @default(ACTIVE)
-  created_at DateTime
+  status    Status   @default(ACTIVE) @map("status")
+  createdAt DateTime @default(now()) @map("created_at")
 
-  workspace_id String
-  workspace    Workspace @relation(fields: [workspace_id], references: [id])
+  workspaceId String    @map("workspace_id")
+  workspace   Workspace @relation(fields: [workspaceId], references: [id])
 
-  name     String
-  email    String
-  role     String
-  features BigInt
+  name     String @map("name")
+  email    String @unique @map("email")
+  role     String @map("role")
+  features BigInt @map("features")
 
-  auth UserAuth[]
+  auth UserAuth?
 
   @@map("users")
 }
 
 model UserAuth {
-  user_id     String @id @unique
-  sign_in_key String @unique
+  userId    String @id @unique @map("userId")
+  signInKey String @unique @map("signInKey")
 
-  password_hash String
+  passwordHash String @map("password_hash")
 
-  workspace_id String
-  user         User   @relation(fields: [user_id], references: [id])
+  workspaceId String @map("workspace_id")
+  user        User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("users_auth")
 }
 
 model Workspace {
-  id        String @id @unique
-  public_id Int    @unique @default(autoincrement())
-  status    Status @default(ACTIVE)
+  id        String @id @unique @map("id")
+  public_id Int    @unique @default(autoincrement()) @map("publicId")
+  status    Status @default(ACTIVE) @map("status")
 
   users  User[]
   config WorkspaceConfig?
 
-  name        String
-  description String?
-  features    BigInt
+  name        String  @map("name")
+  description String? @map("description")
+  features    BigInt  @map("features")
 
   @@map("workspaces")
 }
 
 model WorkspaceConfig {
-  workspace_id String    @id @unique
-  workspace    Workspace @relation(fields: [workspace_id], references: [id])
-  status       Status    @default(ACTIVE)
+  workspaceId String    @id @unique @map("workspaceId")
+  workspace   Workspace @relation(fields: [workspaceId], references: [id])
+  status      Status    @default(ACTIVE) @map("status")
 
-  currency String @default("BRL")
-  timezone String @default("UTC-03:00/America/Sao_Paulo")
+  currency String @default("BRL") @map("currency")
+  timezone String @default("UTC-03:00/America/Sao_Paulo") @map("timezone")
 
-  url_logo String?
+  logoUrl String? @map("logo_url")
 
   @@map("workspace_config")
 }
