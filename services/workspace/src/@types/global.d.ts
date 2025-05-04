@@ -11,4 +11,7 @@ declare global {
     var __logger: Logger
     var __prisma: PrismaClient
     var __app: HttpServer
+
+    type SuperOmit<Object extends object, Key extends keyof Object> = Omit<Object, Key>
+    type JSONObject = Record<string, unknown>
 }
