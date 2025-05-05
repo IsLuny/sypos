@@ -1,2 +1,2 @@
-export * from './currency'
+export * from './enums'
 export * from './workspace'

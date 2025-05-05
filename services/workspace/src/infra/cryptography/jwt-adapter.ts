@@ -20,7 +20,7 @@ export class JwtAdapter {
 		liveTtime: number,
 		payload: Omit<JwtDecoded, 'expireAt'>
 	): Promise<string> {
-		const expireAt = Math.floor(Date.now() / 1000) + liveTtime
+		const expireAt = (Math.floor(Date.now() / 1000) + liveTtime)
 
 		const token = await sign(
 			{
@@ -39,7 +39,7 @@ export class JwtAdapter {
 		try {
 			const decodedToken = (await verify(token.replace(/^Bearer\s+/, ''), this.secret)) as JwtDecoded
 
-			if(new Date(decodedToken.expireAt).getTime() < Date.now()) {
+			if(new Date(decodedToken.expireAt * 1000).getTime() < Date.now()) {
 				return left({
 					name: 'JwtAuthExpired',
 					message: syposHttpErrors.JwtAuthExpired,

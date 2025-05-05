@@ -1,6 +1,6 @@
-import { User } from '@/domain/workspace/user/user.model'
+import { UserDTO } from '@/core/dtos/user.dto'
 
 export interface UserRepository {
-    findById(id: string): Promise<User | null>
-    findByEmail(signInKey: string): Promise<User | null>
+    findById(id: string): Promise<UserDTO | null>
+    findByEmail(signInKey: string): Promise<UserDTO | null>
 }
