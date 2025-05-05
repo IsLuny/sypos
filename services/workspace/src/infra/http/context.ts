@@ -25,7 +25,7 @@ interface RequestContextGeneric {
     Reply?: object
 }
 
-interface ReplyError {
+export interface ReplyError {
 	message: string
 	description?: string | JSONObject
 	tag?: string

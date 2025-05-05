@@ -10,7 +10,7 @@ export async function signInUser(context: RequestContext<{
         password: string 
     },
 	Reply: {
-		auth_token: string
+		token: string
 	}
 }>) {
 	try {
@@ -37,7 +37,7 @@ export async function signInUser(context: RequestContext<{
 		})
 
 		return context.reply({
-			auth_token: authToken, 
+			token: authToken, 
 		}, 200)
 	} catch (e) {
 		throw e

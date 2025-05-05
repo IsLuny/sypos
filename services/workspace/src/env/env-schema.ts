@@ -18,6 +18,7 @@ export const envSchema = z.object({
 	POSTGRES_USER: z.string().default('postgres'),
 	POSTGRES_PORT: z.coerce.number().default(5432),
 	POSTGRES_DB: z.string().default('db-dev'),
+	COOKIE_SIGNATURE_SECRET: z.string(),
 	JWT_SECRET: z.string(),
 	PASSWORD_BCRYPT_SALT: z.coerce.number(),
 	EXPIRE_TOKEN_IN_SECONDS: z.coerce.number(),

@@ -4,6 +4,7 @@ import { signInUser } from '@/domain/workspace/auth/sign-in/sign-in.controller'
 import { makeFastifyReply } from '@/infra/http/context'
 import { FastifyFC } from '@/infra/http/fastify'
 
+type SignInSuccessReplyData = { token: string }
 export const AuthRoute: FastifyFC = (fastify) => {
 	fastify.route({
 		url: '/login',
@@ -19,10 +20,10 @@ export const AuthRoute: FastifyFC = (fastify) => {
 				200: z.any(),
 			},
 		},
-		async handler(request, reponse) {
+		async handler(request, response) {
 			const body = request.body
 
-			const reply = makeFastifyReply(reponse)
+			const reply = makeFastifyReply(response)
 
 			const result = await signInUser({ 
 				Payload: { 

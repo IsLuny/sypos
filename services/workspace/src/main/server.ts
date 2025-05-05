@@ -1,18 +1,23 @@
+import { fastifyCookie } from '@fastify/cookie'
 import { fastifyCors } from '@fastify/cors'
 import { fastifySwagger } from '@fastify/swagger'
 import { fastifySwaggerUi } from '@fastify/swagger-ui'
 import { jsonSchemaTransform, serializerCompiler, validatorCompiler } from 'fastify-type-provider-zod'
 
 import { version } from '@/../package.json'
+import { env } from '@/env'
 import { logger } from '@/logger'
 
 import { app } from './app'
 import { Routes } from './routes/index.route'
 
 export const setupServer = async() => {
+	// Cors
+	app.register(fastifyCors, { origin: '*' })
+
+	// Swagger
 	app.fastify.setValidatorCompiler(validatorCompiler)
 	app.fastify.setSerializerCompiler(serializerCompiler)
-	app.register(fastifyCors, { origin: '*' })
 	app.register(fastifySwagger, { 
 		openapi: {
 			info: {
@@ -30,6 +35,13 @@ export const setupServer = async() => {
 
 	app.register(fastifySwaggerUi, {
 		routePrefix: '/docs',
+	})
+
+	// Cookie
+	app.register(fastifyCookie, {
+		secret: env.COOKIE_SIGNATURE_SECRET,
+		hook: 'onRequest',
+		parseOptions: {},
 	})
 
 	app.get('/users', (request, reply) => {

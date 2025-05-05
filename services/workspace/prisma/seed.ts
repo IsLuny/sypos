@@ -29,14 +29,14 @@ async function main() {
 	await prisma.user.create({
 		data: {
 			id: userId,
-			email: 'devs@isluny.org',
+			email: 'devs+owner@isluny.org',
 			features: 0n,
 			name: 'Devs IsLuny',
 			role: 'WORKSPACE://OWNER',
 			workspaceId,
 			auth: {
 				create: {
-					signInKey: 'devs@isluny.org',
+					signInKey: 'devs+owner@isluny.org',
 					passwordHash: await PasswordAdapter.hash('password'),
 					workspaceId,
 				},
